@@ -24,41 +24,37 @@ function buttonHandler() {
 }
 
 function loadOptions() {
+ var $invertCheckbox = $('#invertCheckbox');
+ var $lightColorPicker = $('#lightColorPicker');
 
- var $hourColorPicker = $('#hourColorPicker');
- var $minColorPicker = $('#minColorPicker');
- var $pmColorPicker = $('#pmColorPicker');
+ if (localStorage.invert) {
+  $invertCheckbox[0].checked = localStorage.invert === '1';
+ }
 
- if (localStorage.hourColor) {
-  $hourColorPicker[0].value = localStorage.hourColor;
- }
- 
- if (localStorage.minColor) {
-  $minColorPicker[0].value = localStorage.minColor;
- }
- 
- if (localStorage.pmColor) {
-  $pmColorPicker[0].value = localStorage.pmColor;
+ if (localStorage.lightColor) {
+  $lightColorPicker[0].value = localStorage.lightColor;
  }
  
 } 
 
 function getAndStoreConfigData() {
- var $hourColorPicker = $('#hourColorPicker');
- var $minColorPicker = $('#minColorPicker');
- var $pmColorPicker = $('#pmColorPicker');
-
+ var $lightColorPicker = $('#lightColorPicker');
+ var $invertCheckbox = $('#invertCheckbox');
+ var $invertValue = 0;
+ if ($invertCheckbox[0].checked) {
+   $invertValue = 1; 
+ }
+// console.log('invert value: ' + $invertValue);
+ 
  var options = {
-  hourColor: $hourColorPicker.val(),
-  minColor: $minColorPicker.val(),
-  pmColor: $pmColorPicker.val()
+  invert: $invertValue,
+  lightColor: $lightColorPicker.val()
  };
  
  console.log('Got options: ' + JSON.stringify(options));
 
- localStorage.hourColor = options.hourColor;
- localStorage.minColor = options.minColor;
- localStorage.pmColor = options.pmColor;
+ localStorage.invert = $invertValue;
+ localStorage.lightColor = options.lightColor;
 
  return options;
 }
