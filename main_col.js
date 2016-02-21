@@ -24,12 +24,7 @@ function buttonHandler() {
 }
 
 function loadOptions() {
- var $invertCheckbox = $('#invertCheckbox');
  var $lightColorPicker = $('#lightColorPicker');
-
- if (localStorage.invert) {
-  $invertCheckbox[0].checked = localStorage.invert === '1';
- }
 
  if (localStorage.lightColor) {
   $lightColorPicker[0].value = localStorage.lightColor;
@@ -39,21 +34,13 @@ function loadOptions() {
 
 function getAndStoreConfigData() {
  var $lightColorPicker = $('#lightColorPicker');
- var $invertCheckbox = $('#invertCheckbox');
- var $invertValue = 0;
- if ($invertCheckbox[0].checked) {
-   $invertValue = 1; 
- }
-// console.log('invert value: ' + $invertValue);
- 
+
  var options = {
-  invert: $invertValue,
   lightColor: $lightColorPicker.val()
  };
  
  console.log('Got options: ' + JSON.stringify(options));
 
- localStorage.invert = $invertValue;
  localStorage.lightColor = options.lightColor;
 
  return options;
